@@ -7,7 +7,9 @@
 
 ## 展示影片
 
-https://github.com/user-attachments/assets/bbf5e5fc-0a43-470b-9d84-77edaa6dc396
+
+https://github.com/user-attachments/assets/9e87909e-b333-4a1c-a613-e50f4c3f4fa1
+
 
 
 ---
