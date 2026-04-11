@@ -1,3 +1,4 @@
+
 # 104 批量應徵助手
 
 > Chrome 擴充套件 · 在 104 人力銀行搜尋結果頁或公司職缺頁，一鍵批量自動應徵
@@ -6,7 +7,8 @@
 
 ## 展示影片
 
-[![展示影片預覽](media/thumbnail.png)](media/demo.mp4)
+https://github.com/user-attachments/assets/bbf5e5fc-0a43-470b-9d84-77edaa6dc396
+
 
 ---
 
