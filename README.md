@@ -6,7 +6,7 @@
 
 ## 展示影片
 
-[![展示影片預覽](media/thumbnail.png)](media/展示影片.mp4)
+[![展示影片預覽](media/thumbnail.png)](media/demo.mp4)
 
 ---
 
