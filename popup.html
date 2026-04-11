@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>104 批量應徵</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 300px;
+      font-family: 'Noto Sans TC', -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e8e8f0;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid #2a2a3e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(232,66,66,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.3px;
+    }
+
+    /* Status section */
+    .status-section {
+      padding: 16px 20px;
+    }
+
+    .status-card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .status-label {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .status-badge.idle {
+      background: #1e2a1e;
+      color: #5a8a5a;
+      border: 1px solid #2a4a2a;
+    }
+
+    .status-badge.running {
+      background: #2a1e1e;
+      color: #ff6b6b;
+      border: 1px solid #4a2a2a;
+    }
+
+    .status-badge.running .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Progress */
+    .progress-block {
+      margin-top: 2px;
+    }
+
+    .progress-nums {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .progress-main {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .progress-main span {
+      color: #e84242;
+    }
+
+    .progress-sub {
+      font-size: 11px;
+      color: #555;
+    }
+
+    .progress-bar-bg {
+      height: 5px;
+      background: #2a2a3e;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #e84242, #ff6b6b);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+      min-width: 0;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .stat-box {
+      flex: 1;
+      background: #1a1a2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .stat-num.green { color: #5ab85a; }
+    .stat-num.orange { color: #ff9a3c; }
+
+    .stat-label {
+      font-size: 10px;
+      color: #555;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 11px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-stop {
+      background: linear-gradient(135deg, #e84242, #c92020);
+      color: white;
+    }
+
+    .btn-stop:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(232,66,66,0.4);
+    }
+
+    .btn-secondary {
+      background: #1a1a2e;
+      color: #888;
+      border: 1px solid #2a2a3e;
+    }
+
+    .btn-secondary:hover {
+      color: #ccc;
+      border-color: #444;
+    }
+
+    /* Idle state hint */
+    .idle-hint {
+      text-align: center;
+      padding: 20px 0 8px;
+      color: #444;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .idle-hint .icon {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 8px;
+      opacity: 0.5;
+    }
+
+    .idle-hint a {
+      color: #e84242;
+      text-decoration: none;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 10px 20px 14px;
+      border-top: 1px solid #1a1a2e;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 10px;
+      color: #333;
+    }
+
+    .footer-text a {
+      color: #555;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-top">
+      <img class="logo" src="icons/icon48.png" alt="104">
+      <div>
+        <div class="title">批量應徵助手</div>
+      </div>
+    </div>
+    <div class="subtitle">104 人力銀行・自動應徵工具</div>
+  </div>
+
+  <div class="status-section">
+
+    <!-- Status card -->
+    <div class="status-card">
+      <div class="status-row">
+        <span class="status-label">執行狀態</span>
+        <span class="status-badge idle" id="statusBadge">
+          <span>閒置中</span>
+        </span>
+      </div>
+
+      <div class="progress-block">
+        <div class="progress-nums">
+          <div class="progress-main" id="progressText">
+            <span id="appliedNum">0</span> / <span id="totalNum">0</span>
+          </div>
+          <div class="progress-sub" id="remainingText">尚未開始</div>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-num green" id="successNum">0</div>
+        <div class="stat-label">已送出</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num orange" id="queueNum">0</div>
+        <div class="stat-label">待處理</div>
+      </div>
+    </div>
+
+    <!-- Idle hint -->
+    <div class="idle-hint" id="idleHint">
+      <span class="icon">📋</span>
+      前往 <a href="https://www.104.com.tw/jobs/search/" target="_blank">104 搜尋結果頁</a><br>
+      勾選職缺後點擊「開始批次應徵」
+    </div>
+
+    <!-- Controls (shown when running) -->
+    <div class="btn-row" id="btnRow" style="display:none">
+      <button class="btn btn-stop" id="stopBtn">⏹ 停止應徵</button>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">僅供個人使用 · 請遵守 104 使用條款</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

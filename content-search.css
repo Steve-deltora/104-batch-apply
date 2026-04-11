@@ -1,0 +1,231 @@
+/* ── Batch Select Button ─────────────────────────────────────────────────── */
+/*
+  Mirrors 104's own .btn-outline-light--apply style but uses teal/green
+  so it's visually distinct from the orange 應徵 button.
+  Inserted between .apply-button.action-container__apply and .action-apply
+*/
+
+.batch-select-wrapper {
+  width: 100%;
+  margin: 6px 0;   /* 對齊 104 儲存/應徵按鈕的上下間距 */
+}
+
+.batch-select-label {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  user-select: none;
+}
+
+/* Hidden native checkbox */
+.batch-select-label input[type="checkbox"] {
+  display: none;
+}
+
+/* Styled to look like 104's own button row buttons */
+.batch-select-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  /* Match 104's .btn.btn-sm sizing */
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  /* 填色風格：teal 底白字，與 104 的空心按鈕形成對比 */
+  border: 1px solid #20a09a;
+  color: #fff;
+  background: #20a09a;
+
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.batch-select-icon {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.batch-select-label:hover .batch-select-inner {
+  background: #17847f;
+  border-color: #17847f;
+  color: #fff;
+}
+
+/* Active / checked state */
+.batch-select--active .batch-select-inner {
+  background: #20a09a;
+  color: #fff;
+  border-color: #20a09a;
+  box-shadow: 0 0 0 2px rgba(32, 160, 154, 0.25);
+}
+
+.batch-select--active:hover .batch-select-inner {
+  background: #17847f;
+  border-color: #17847f;
+}
+
+/* ── Processing state (currently being applied) ──────────────────────────── */
+.batch-card-processing {
+  outline: 2px solid #f0a500 !important;
+  outline-offset: 1px;
+  background-color: #fffbf0 !important;
+}
+
+/* ── Done state (applied successfully) ───────────────────────────────────── */
+.batch-select--done .batch-select-inner {
+  background: #e8f5e9;
+  border-color: #66bb6a;
+  color: #388e3c;
+  cursor: default;
+}
+
+/* ── Card highlight when selected ────────────────────────────────────────── */
+.batch-card-selected {
+  outline: 2px solid #20a09a !important;
+  outline-offset: 1px;
+  background-color: #f0faf9 !important;
+}
+
+/* ── Floating bottom control bar ─────────────────────────────────────────── */
+#batch-apply-bar {
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999999;
+  transition: bottom 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+#batch-apply-bar.batch-bar-visible {
+  bottom: 24px;
+  pointer-events: all;
+}
+
+.batch-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a2e;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 50px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(32,160,154,0.3);
+  font-family: -apple-system, 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.batch-bar-icon {
+  font-size: 18px;
+}
+
+.batch-bar-text { color: #ccc; }
+.batch-bar-text strong { color: #4dd9d4; font-size: 16px; }
+
+#batch-start-btn {
+  background: linear-gradient(135deg, #20a09a, #4dd9d4);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+#batch-start-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(32,160,154,0.5);
+}
+
+#batch-start-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#batch-clear-btn {
+  background: transparent;
+  color: #888;
+  border: 1px solid #444;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+#batch-clear-btn:hover { color: #ccc; border-color: #666; }
+
+/* ── 清爽模式：隱藏職缺卡片非必要資訊 ───────────────────────────────────── */
+
+/* 左側日期欄 */
+.job-list-container .date {
+  display: none !important;
+}
+
+/* 儲存按鈕 */
+.action-container__save {
+  display: none !important;
+}
+
+/* 職缺描述文字 */
+.info-description {
+  display: none !important;
+}
+
+/* 福利/標籤列（年終獎金、員工宿舍…） */
+.info-othertags {
+  display: none !important;
+}
+
+/* 應徵人數分析列 */
+.action-apply {
+  display: none !important;
+}
+
+/* 產業類別（IC設計相關業…） */
+.info-company-addon-type {
+  display: none !important;
+}
+
+/* 薪資標籤（待遇面議） */
+.info-tags__text:has(a[href*="sr="]) {
+  display: none !important;
+}
+
+/* ── Toast ────────────────────────────────────────────────────────────────── */
+.batch-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999999;
+  background: #1a1a2e;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-family: -apple-system, 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  max-width: 360px;
+}
+
+.batch-toast.batch-toast-show {
+  opacity: 1;
+  transform: translateY(0);
+}
