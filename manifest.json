@@ -25,7 +25,8 @@
       "matches": [
         "https://www.104.com.tw/jobs/search/*",
         "https://www.104.com.tw/jobs/*",
-        "https://www.104.com.tw/company/*"
+        "https://www.104.com.tw/company/*",
+        "https://pda.104.com.tw/work/mate/list/*"
       ],
       "js":  ["content-search.js"],
       "css": ["content-search.css"],
